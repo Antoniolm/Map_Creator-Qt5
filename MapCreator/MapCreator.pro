@@ -13,8 +13,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    advancedqlabel.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    advancedqlabel.h
 
 FORMS    += mainwindow.ui
