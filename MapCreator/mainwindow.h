@@ -9,6 +9,7 @@
 
 #include <QMainWindow>
 #include <QLabel>
+#include <sizemapdialog.h>
 
 namespace Ui {
 class MainWindow;
@@ -24,6 +25,8 @@ public:
 
 private slots:
     void onChanged();
+
+    void on_actionNew_File_triggered();
 
 private:
     Ui::MainWindow *ui;

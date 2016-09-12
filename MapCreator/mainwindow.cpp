@@ -33,9 +33,26 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+///
+/// \brief MainWindow::onChanged
+///
 void MainWindow::onChanged(){
     AdvancedQLabel *label=new AdvancedQLabel("2");
     connect(label,SIGNAL(clicked()),this,SLOT(onChanged()));
     ui->map_section->addWidget(label);
+
+}
+
+///
+/// \brief MainWindow::on_actionNew_File_triggered
+///
+void MainWindow::on_actionNew_File_triggered()
+{
+    sizeMapDialog *sizeMapDia=new sizeMapDialog();
+    sizeMapDia->exec();
+    std::pair<int,int> size=sizeMapDia->getSize();
+
+   // for(int i=0;i<size.first;i++)
+    //    for(int j=0;j<size.second;j++)
 
 }

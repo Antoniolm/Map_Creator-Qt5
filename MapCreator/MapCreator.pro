@@ -14,9 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    advancedqlabel.cpp
+    advancedqlabel.cpp \
+    sizemapdialog.cpp
 
 HEADERS  += mainwindow.h \
-    advancedqlabel.h
+    advancedqlabel.h \
+    sizemapdialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    sizemapdialog.ui
