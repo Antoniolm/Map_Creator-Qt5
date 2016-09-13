@@ -47,17 +47,35 @@ void MainWindow::on_actionNew_File_triggered()
     sizeMapDialog *sizeMapDia=new sizeMapDialog();
     sizeMapDia->exec();
     std::pair<int,int> size=sizeMapDia->getSize();
-     AdvancedQLabel *label;
+    AdvancedQLabel *label;
+
+
+    QPushButton * pushButton= new QPushButton("1-4");
+    pushButton->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding);
+    ui->map_section->addWidget(pushButton);
+
+    pushButton= new QPushButton("2-3");
+    QVBoxLayout *vBox = new QVBoxLayout();;
+    vBox->addWidget(pushButton);
+
+    QHBoxLayout *hBox;
+
 
     for(int i=0;i<size.first;i++){
-        QHBoxLayout *hbox = new QHBoxLayout();
+        hBox = new QHBoxLayout();
         for(int j=0;j<size.second;j++){
            label=new AdvancedQLabel("");
-            hbox->addWidget(label);
+            hBox->addWidget(label);
         }
-        ui->map_section->addLayout(hbox);
+        vBox->addLayout(hBox);
+
     }
-    QPushButton *pushButton= new QPushButton("Boton");
+
+    pushButton= new QPushButton("3-2");
+    vBox->addWidget(pushButton);
+    ui->map_section->addLayout(vBox);
+    pushButton= new QPushButton("1-4");
+    pushButton->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding);
     ui->map_section->addWidget(pushButton);
 
 }
