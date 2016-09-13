@@ -7,6 +7,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <advancedqlabel.h>
+#include <QPushButton>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,12 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     AdvancedQLabel *label=new AdvancedQLabel("");
-    for(int i=0;i<10;i++){
-        label=new AdvancedQLabel("");
-        connect(label,SIGNAL(clicked()),this,SLOT(onChanged()));
-        ui->map_section->addWidget(label);
-    }
-    /*
+   /*
 QWidget *widget = new QWidget();
 QHBoxLayout *hbox = new QHBoxLayout();
 hbox->addWidget( label1 );
@@ -51,8 +47,17 @@ void MainWindow::on_actionNew_File_triggered()
     sizeMapDialog *sizeMapDia=new sizeMapDialog();
     sizeMapDia->exec();
     std::pair<int,int> size=sizeMapDia->getSize();
+     AdvancedQLabel *label;
 
-   // for(int i=0;i<size.first;i++)
-    //    for(int j=0;j<size.second;j++)
+    for(int i=0;i<size.first;i++){
+        QHBoxLayout *hbox = new QHBoxLayout();
+        for(int j=0;j<size.second;j++){
+           label=new AdvancedQLabel("");
+            hbox->addWidget(label);
+        }
+        ui->map_section->addLayout(hbox);
+    }
+    QPushButton *pushButton= new QPushButton("Boton");
+    ui->map_section->addWidget(pushButton);
 
 }
