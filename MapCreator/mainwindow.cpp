@@ -19,12 +19,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Creamos los botones para el movimiento por el mapa y vamos añadiendolos al
     //layout principal
-    buttonRight= new QPushButton("right");
-    buttonRight->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding);
-    buttonRight->setStyleSheet("QPushButton {max-width:30px;}");
-    connect(buttonRight,SIGNAL(clicked(bool)),this,SLOT(on_buttonRight()));
-    buttonRight->setEnabled(false);
-    ui->map_section->addWidget(buttonRight);
+    buttonLeft= new QPushButton("Left");
+    buttonLeft->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding);
+    buttonLeft->setStyleSheet("QPushButton {max-width:30px;}");
+    connect(buttonLeft,SIGNAL(clicked(bool)),this,SLOT(on_buttonLeft()));
+    buttonLeft->setEnabled(false);
+    ui->map_section->addWidget(buttonLeft);
 
     QHBoxLayout *hBox;
     QVBoxLayout *vBox = new QVBoxLayout();
@@ -54,13 +54,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->map_section->addLayout(vBox);
 
-    buttonLeft= new QPushButton("left");
-    buttonLeft->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding);
-    buttonLeft->setStyleSheet("QPushButton {max-width:30px;}");
-    connect(buttonLeft,SIGNAL(clicked(bool)),this,SLOT(on_buttonLeft()));
-    buttonLeft->setEnabled(false);
+    buttonRight= new QPushButton("Right");
+    buttonRight->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding);
+    buttonRight->setStyleSheet("QPushButton {max-width:30px;}");
+    connect(buttonRight,SIGNAL(clicked(bool)),this,SLOT(on_buttonRight()));
+    buttonRight->setEnabled(false);
 
-    ui->map_section->addWidget(buttonLeft);
+    ui->map_section->addWidget(buttonRight);
     ui->map_section->setSpacing(2);
 }
 
@@ -97,19 +97,46 @@ void MainWindow::on_buttonDown(){
 
 }
 
-///
+//////////////////////////////////
 /// \brief MainWindow::on_buttonLeft
-///
+/// Método para la navegación del usuario por el mapa actual
+/// Realizara un cambio de sección del mapa y mostrara la
+/// sección a la izquierda de la sección anterior
+///////////////////////////////////////
 void MainWindow::on_buttonLeft(){
+    std::pair<int,int> size=map.getSizeMap();
+    std::pair<int,int> numPages=map.getNumPages();
+    std::pair<int,int> currPages=map.getCurrentPage();
 
+    currPages.second--;
 
+    if(currPages.second==0)
+        buttonLeft->setEnabled(false);
+
+    buttonRight->setEnabled(true);
+
+    map.setCurrentPage(currPages);
 }
 
-///
+//////////////////////////////////
 /// \brief MainWindow::on_buttonRight
-///
+/// Método para la navegación del usuario por el mapa actual
+/// Realizara un cambio de sección del mapa y mostrara la
+/// sección a la derecha de la sección anterior
+///////////////////////////////////////
 void MainWindow::on_buttonRight(){
+    std::pair<int,int> size=map.getSizeMap();
+    std::pair<int,int> numPages=map.getNumPages();
+    std::pair<int,int> currPages=map.getCurrentPage();
 
+    currPages.second++;
+
+    if(currPages.second==numPages.second-1)
+        buttonRight->setEnabled(false);
+
+    buttonLeft->setEnabled(true);
+
+    map.setCurrentPage(currPages);
 
 }
 
@@ -136,8 +163,10 @@ void MainWindow::on_actionNew_File_triggered()
 
     if(size.first%30 != 0) numPage.first++;
     if(size.second%40 != 0) numPage.second++;
-
     map.setNumPages(numPage);
+
+    buttonRight->setEnabled(true);
+    buttonDown->setEnabled(true);
 
     delete sizeMapDia;
 }
