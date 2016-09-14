@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Creamos los botones para el movimiento por el mapa y vamos añadiendolos al
     //layout principal
-    buttonLeft= new QPushButton("Left");
+    buttonLeft= new QPushButton("left");
     buttonLeft->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding);
     buttonLeft->setStyleSheet("QPushButton {max-width:30px;}");
     connect(buttonLeft,SIGNAL(clicked(bool)),this,SLOT(on_buttonLeft()));
@@ -54,7 +54,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->map_section->addLayout(vBox);
 
-    buttonRight= new QPushButton("Right");
+    buttonRight= new QPushButton("right");
     buttonRight->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding);
     buttonRight->setStyleSheet("QPushButton {max-width:30px;}");
     connect(buttonRight,SIGNAL(clicked(bool)),this,SLOT(on_buttonRight()));
@@ -70,7 +70,7 @@ MainWindow::~MainWindow()
 }
 
 //////////////////////
-/// \brief MainWindow::onChanged
+/// \brief MainWindow::onClicked
 /// Método activado cuando se clickea una posicion del mapa
 /// Realizara un cambio de imagen en la posicion del mapa teniendo en cuenta
 /// la textura que se tenga seleccionada en el layout texture_setion
@@ -82,19 +82,47 @@ void MainWindow::onClicked(){
     label->setStyleSheet("QLabel {background: blue;}");
 }
 
-///
+//////////////////////////////////
 /// \brief MainWindow::on_buttonUp
-///
+/// Método para la navegación del usuario por el mapa actual
+/// Realizara un cambio de sección del mapa y mostrara la
+/// sección de arriba de la sección anterior
+///////////////////////////////////////
 void MainWindow::on_buttonUp(){
+    std::pair<int,int> size=map.getSizeMap();
+    std::pair<int,int> numPages=map.getNumPages();
+    std::pair<int,int> currPages=map.getCurrentPage();
 
+    currPages.first--;
+
+    if(currPages.first==0)
+        buttonUp->setEnabled(false);
+
+    buttonDown->setEnabled(true);
+
+    map.setCurrentPage(currPages);
 
 }
 
-///
+//////////////////////////////////
 /// \brief MainWindow::on_buttonDown
-///
+/// Método para la navegación del usuario por el mapa actual
+/// Realizara un cambio de sección del mapa y mostrara la
+/// sección de abajo de la sección anterior
+///////////////////////////////////////
 void MainWindow::on_buttonDown(){
+    std::pair<int,int> size=map.getSizeMap();
+    std::pair<int,int> numPages=map.getNumPages();
+    std::pair<int,int> currPages=map.getCurrentPage();
 
+    currPages.first++;
+
+    if(currPages.first==numPages.first-1)
+        buttonDown->setEnabled(false);
+
+    buttonUp->setEnabled(true);
+
+    map.setCurrentPage(currPages);
 }
 
 //////////////////////////////////
