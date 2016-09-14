@@ -6,22 +6,50 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <advancedqlabel.h>
-#include <QPushButton>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    AdvancedQLabel *label=new AdvancedQLabel("");
-   /*
-QWidget *widget = new QWidget();
-QHBoxLayout *hbox = new QHBoxLayout();
-hbox->addWidget( label1 );
-hbox->addWidget( label2 );
-widget->setLayout( hbox );
-mainwindow->setCentralWidget( widget );*/
+
+    AdvancedQLabel *label;
+
+    //Creamos los botones para el movimiento por el mapa y vamos añadiendolos al
+    //layout principal
+    QPushButton * pushButton= new QPushButton("right");
+    pushButton->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding);
+    pushButton->setStyleSheet("QPushButton {max-width:30px;}");
+    pushButton->setEnabled(false);
+    ui->map_section->addWidget(pushButton);
+
+    QHBoxLayout *hBox;
+    QVBoxLayout *vBox = new QVBoxLayout();
+    pushButton= new QPushButton("up");
+    pushButton->setEnabled(false);
+    vBox->addWidget(pushButton);
+
+    //Creamos la estructura principal del mapa
+    //30x40 de AdvancedQLabel
+    for(int i=0;i<30;i++){
+        hBox = new QHBoxLayout();
+        for(int j=0;j<40;j++){
+           label=new AdvancedQLabel("");
+            hBox->addWidget(label);
+        }
+        vBox->addLayout(hBox);
+    }
+
+    pushButton= new QPushButton("down");
+    pushButton->setEnabled(false);
+    vBox->addWidget(pushButton);
+    ui->map_section->addLayout(vBox);
+    pushButton= new QPushButton("left");
+    pushButton->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding);
+    pushButton->setEnabled(false);
+    pushButton->setStyleSheet("QPushButton {max-width:30px;}");
+    ui->map_section->addWidget(pushButton);
+    ui->map_section->setSpacing(2);
 }
 
 MainWindow::~MainWindow()
@@ -47,35 +75,4 @@ void MainWindow::on_actionNew_File_triggered()
     sizeMapDialog *sizeMapDia=new sizeMapDialog();
     sizeMapDia->exec();
     std::pair<int,int> size=sizeMapDia->getSize();
-    AdvancedQLabel *label;
-
-
-    QPushButton * pushButton= new QPushButton("1-4");
-    pushButton->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding);
-    ui->map_section->addWidget(pushButton);
-
-    pushButton= new QPushButton("2-3");
-    QVBoxLayout *vBox = new QVBoxLayout();;
-    vBox->addWidget(pushButton);
-
-    QHBoxLayout *hBox;
-
-
-    for(int i=0;i<size.first;i++){
-        hBox = new QHBoxLayout();
-        for(int j=0;j<size.second;j++){
-           label=new AdvancedQLabel("");
-            hBox->addWidget(label);
-        }
-        vBox->addLayout(hBox);
-
-    }
-
-    pushButton= new QPushButton("3-2");
-    vBox->addWidget(pushButton);
-    ui->map_section->addLayout(vBox);
-    pushButton= new QPushButton("1-4");
-    pushButton->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding);
-    ui->map_section->addWidget(pushButton);
-
 }

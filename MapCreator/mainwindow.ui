@@ -21,7 +21,11 @@
        <enum>Qt::Horizontal</enum>
       </property>
       <widget class="QWidget" name="horizontalLayoutWidget">
-       <layout class="QHBoxLayout" name="map_section"/>
+       <layout class="QHBoxLayout" name="map_section" stretch="">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetFixedSize</enum>
+        </property>
+       </layout>
       </widget>
       <widget class="QWidget" name="verticalLayoutWidget">
        <layout class="QVBoxLayout" name="texture_section">

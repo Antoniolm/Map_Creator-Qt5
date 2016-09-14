@@ -9,7 +9,7 @@
 AdvancedQLabel::AdvancedQLabel(QString string,QWidget *parent) : QLabel(parent)
 {
     setText(string);
-    setStyleSheet("QLabel {background: blue;}");
+    setStyleSheet("QLabel {background: gray;}");
     setFixedHeight(20);
     setFixedWidth(20);
     connect(this,SIGNAL(clicked()),this,SLOT(slotClicked()));

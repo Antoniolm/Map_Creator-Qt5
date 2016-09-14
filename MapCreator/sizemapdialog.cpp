@@ -13,9 +13,9 @@ sizeMapDialog::sizeMapDialog() : QDialog(0),ui(new Ui::sizeMapDialog)
     height=0;
     width=0;
     ui->cellheight->setMaximum(1000);
-    ui->cellheight->setMinimum(20);
+    ui->cellheight->setMinimum(100);
     ui->cellwidth->setMaximum(1000);
-    ui->cellwidth->setMinimum(20);
+    ui->cellwidth->setMinimum(100);
 }
 sizeMapDialog::~sizeMapDialog(){
     delete ui;

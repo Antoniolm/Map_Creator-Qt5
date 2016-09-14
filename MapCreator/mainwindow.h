@@ -10,6 +10,8 @@
 #include <QMainWindow>
 #include <QLabel>
 #include <sizemapdialog.h>
+#include <advancedqlabel.h>
+#include <QPushButton>
 
 namespace Ui {
 class MainWindow;
@@ -30,6 +32,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QList<AdvancedQLabel> *visibleMap, *map;
+    int totalHeight,totalWidth;
 };
 
 #endif // MAINWINDOW_H
