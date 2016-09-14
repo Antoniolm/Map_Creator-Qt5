@@ -19,17 +19,20 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Creamos los botones para el movimiento por el mapa y vamos añadiendolos al
     //layout principal
-    QPushButton * pushButton= new QPushButton("right");
-    pushButton->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding);
-    pushButton->setStyleSheet("QPushButton {max-width:30px;}");
-    pushButton->setEnabled(false);
-    ui->map_section->addWidget(pushButton);
+    buttonRight= new QPushButton("right");
+    buttonRight->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding);
+    buttonRight->setStyleSheet("QPushButton {max-width:30px;}");
+    connect(buttonRight,SIGNAL(clicked(bool)),this,SLOT(on_buttonRight()));
+    buttonRight->setEnabled(false);
+    ui->map_section->addWidget(buttonRight);
 
     QHBoxLayout *hBox;
     QVBoxLayout *vBox = new QVBoxLayout();
-    pushButton= new QPushButton("up");
-    pushButton->setEnabled(false);
-    vBox->addWidget(pushButton);
+    buttonUp= new QPushButton("up");
+    connect(buttonUp,SIGNAL(clicked(bool)),this,SLOT(on_buttonUp()));
+    buttonUp->setEnabled(false);
+
+    vBox->addWidget(buttonUp);
 
     //Creamos la estructura principal del mapa
     //30x40 de AdvancedQLabel
@@ -44,15 +47,20 @@ MainWindow::MainWindow(QWidget *parent) :
         vBox->addLayout(hBox);
     }
 
-    pushButton= new QPushButton("down");
-    pushButton->setEnabled(false);
-    vBox->addWidget(pushButton);
+    buttonDown= new QPushButton("down");
+    connect(buttonDown,SIGNAL(clicked(bool)),this,SLOT(on_buttonDown()));
+    buttonDown->setEnabled(false);
+    vBox->addWidget(buttonDown);
+
     ui->map_section->addLayout(vBox);
-    pushButton= new QPushButton("left");
-    pushButton->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding);
-    pushButton->setEnabled(false);
-    pushButton->setStyleSheet("QPushButton {max-width:30px;}");
-    ui->map_section->addWidget(pushButton);
+
+    buttonLeft= new QPushButton("left");
+    buttonLeft->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding);
+    buttonLeft->setStyleSheet("QPushButton {max-width:30px;}");
+    connect(buttonLeft,SIGNAL(clicked(bool)),this,SLOT(on_buttonLeft()));
+    buttonLeft->setEnabled(false);
+
+    ui->map_section->addWidget(buttonLeft);
     ui->map_section->setSpacing(2);
 }
 
@@ -63,7 +71,9 @@ MainWindow::~MainWindow()
 
 //////////////////////
 /// \brief MainWindow::onChanged
-///
+/// Método activado cuando se clickea una posicion del mapa
+/// Realizara un cambio de imagen en la posicion del mapa teniendo en cuenta
+/// la textura que se tenga seleccionada en el layout texture_setion
 //////////////////////
 void MainWindow::onClicked(){
 
@@ -72,18 +82,54 @@ void MainWindow::onClicked(){
     label->setStyleSheet("QLabel {background: blue;}");
 }
 
-///////////////////////
-/// \brief MainWindow::on_actionNew_File_triggered
 ///
-//////////////////////
+/// \brief MainWindow::on_buttonUp
+///
+void MainWindow::on_buttonUp(){
+
+
+}
+
+///
+/// \brief MainWindow::on_buttonDown
+///
+void MainWindow::on_buttonDown(){
+
+}
+
+///
+/// \brief MainWindow::on_buttonLeft
+///
+void MainWindow::on_buttonLeft(){
+
+
+}
+
+///
+/// \brief MainWindow::on_buttonRight
+///
+void MainWindow::on_buttonRight(){
+
+
+}
+
+/////////////////////////
+/// \brief MainWindow::on_actionNew_File_triggered
+/// Método en el cual se crea un nuevo mapa y se realiza la configuración inicial
+/// de nuestro objeto de la clase gameMap
+/////////////////////////
 void MainWindow::on_actionNew_File_triggered()
 {
     sizeMapDialog *sizeMapDia=new sizeMapDialog();
     sizeMapDia->exec();
     std::pair<int,int> size=sizeMapDia->getSize();
 
+    //Configuramos el tamaño del mapa
+    if(size.first<100)size.first=100;
+    if(size.second<100)size.second=100;
     map.setSizeMap(size);
 
+    //Configuramos el numero de secciones del mapa
     std::pair<int,int> numPage;
     numPage.first=size.first/30;
     numPage.second=size.second/40;

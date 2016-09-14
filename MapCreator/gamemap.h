@@ -17,6 +17,9 @@ public:
     void setNumPages(std::pair<int,int>);
     void setSizeMap(std::pair<int,int>);
     void setCurrentPage(std::pair<int,int>);
+    std::pair<int,int> getNumPages();
+    std::pair<int,int> getSizeMap();
+    std::pair<int,int> getCurrentPage();
 
 private:
     QList<AdvancedQLabel*> map;

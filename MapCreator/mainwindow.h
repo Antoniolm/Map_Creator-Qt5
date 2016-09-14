@@ -30,9 +30,15 @@ private slots:
     void onClicked();
 
     void on_actionNew_File_triggered();
+    //slot para la navegación por el mapa
+    void on_buttonUp();
+    void on_buttonDown();
+    void on_buttonLeft();
+    void on_buttonRight();
 
 private:
     Ui::MainWindow *ui;
+    QPushButton *buttonUp,*buttonDown,*buttonLeft,*buttonRight;
     QList<AdvancedQLabel*> visibleMap;
     gameMap map;
 };
