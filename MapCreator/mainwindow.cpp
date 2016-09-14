@@ -21,9 +21,10 @@ MainWindow::MainWindow(QWidget *parent) :
     //layout principal
     buttonLeft= new QPushButton("left");
     buttonLeft->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding);
-    buttonLeft->setStyleSheet("QPushButton {max-width:30px;}");
+    buttonLeft->setStyleSheet("QPushButton {max-width:35px;}");
     connect(buttonLeft,SIGNAL(clicked(bool)),this,SLOT(on_buttonLeft()));
     buttonLeft->setEnabled(false);
+    buttonLeft->setFocusPolicy(Qt::NoFocus);
     ui->map_section->addWidget(buttonLeft);
 
     QHBoxLayout *hBox;
@@ -31,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     buttonUp= new QPushButton("up");
     connect(buttonUp,SIGNAL(clicked(bool)),this,SLOT(on_buttonUp()));
     buttonUp->setEnabled(false);
-
+    buttonUp->setFocusPolicy(Qt::NoFocus);
     vBox->addWidget(buttonUp);
 
     //Creamos la estructura principal del mapa
@@ -50,18 +51,20 @@ MainWindow::MainWindow(QWidget *parent) :
     buttonDown= new QPushButton("down");
     connect(buttonDown,SIGNAL(clicked(bool)),this,SLOT(on_buttonDown()));
     buttonDown->setEnabled(false);
+    buttonDown->setFocusPolicy(Qt::NoFocus);
     vBox->addWidget(buttonDown);
 
     ui->map_section->addLayout(vBox);
 
     buttonRight= new QPushButton("right");
     buttonRight->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding);
-    buttonRight->setStyleSheet("QPushButton {max-width:30px;}");
+    buttonRight->setStyleSheet("QPushButton {max-width:35px;}");
     connect(buttonRight,SIGNAL(clicked(bool)),this,SLOT(on_buttonRight()));
     buttonRight->setEnabled(false);
+    buttonRight->setFocusPolicy(Qt::NoFocus);
 
     ui->map_section->addWidget(buttonRight);
-    ui->map_section->setSpacing(2);
+    ui->map_section->setSpacing(0);
 }
 
 MainWindow::~MainWindow()
@@ -195,6 +198,12 @@ void MainWindow::on_actionNew_File_triggered()
 
     buttonRight->setEnabled(true);
     buttonDown->setEnabled(true);
+
+
+    //Actualizamos el color de nuestro mapa visible
+    for(int i=0;i<visibleMap.size();i++){
+        visibleMap[i]->setStyleSheet("QLabel {background: white;border:1px solid gray;}");
+    }
 
     delete sizeMapDia;
 }

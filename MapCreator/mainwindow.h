@@ -41,6 +41,7 @@ private:
     QPushButton *buttonUp,*buttonDown,*buttonLeft,*buttonRight;
     QList<AdvancedQLabel*> visibleMap;
     gameMap map;
+    QLabel *nameSection;
 };
 
 #endif // MAINWINDOW_H
