@@ -27,3 +27,7 @@ void AdvancedQLabel::mousePressEvent(QMouseEvent *ev){
 
     emit clicked();
 }
+
+void AdvancedQLabel::operator=(const AdvancedQLabel &label){
+
+}

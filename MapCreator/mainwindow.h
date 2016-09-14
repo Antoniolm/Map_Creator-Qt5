@@ -32,7 +32,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QList<AdvancedQLabel> *visibleMap, *map;
+    QList<AdvancedQLabel*> visibleMap, map;
     int totalHeight,totalWidth;
 };
 

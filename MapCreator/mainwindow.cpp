@@ -6,6 +6,8 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QGraphicsItem>
+#include <QGraphicsView>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -35,7 +37,9 @@ MainWindow::MainWindow(QWidget *parent) :
         hBox = new QHBoxLayout();
         for(int j=0;j<40;j++){
            label=new AdvancedQLabel("");
-            hBox->addWidget(label);
+           connect(label,SIGNAL(clicked()),this,SLOT(onChanged()));
+           visibleMap.append(label);
+           hBox->addWidget(label);
         }
         vBox->addLayout(hBox);
     }
@@ -61,10 +65,10 @@ MainWindow::~MainWindow()
 /// \brief MainWindow::onChanged
 ///
 void MainWindow::onChanged(){
-    AdvancedQLabel *label=new AdvancedQLabel("2");
-    connect(label,SIGNAL(clicked()),this,SLOT(onChanged()));
-    ui->map_section->addWidget(label);
 
+    QPoint p = this->mapFromGlobal(QCursor::pos());
+    AdvancedQLabel* label= static_cast<AdvancedQLabel*>(this->childAt(p.x(),p.y()));
+    label->setStyleSheet("QLabel {background: blue;}");
 }
 
 ///

@@ -16,6 +16,7 @@ public:
     explicit AdvancedQLabel(QString,QWidget *parent = 0);
     ~AdvancedQLabel();
     void mousePressEvent(QMouseEvent *ev);
+    void operator=(const AdvancedQLabel&);
 signals:
     void clicked();
 public slots:
