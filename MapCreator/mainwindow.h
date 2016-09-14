@@ -12,6 +12,7 @@
 #include <sizemapdialog.h>
 #include <advancedqlabel.h>
 #include <QPushButton>
+#include <gamemap.h>
 
 namespace Ui {
 class MainWindow;
@@ -26,14 +27,14 @@ public:
     ~MainWindow();
 
 private slots:
-    void onChanged();
+    void onClicked();
 
     void on_actionNew_File_triggered();
 
 private:
     Ui::MainWindow *ui;
-    QList<AdvancedQLabel*> visibleMap, map;
-    int totalHeight,totalWidth;
+    QList<AdvancedQLabel*> visibleMap;
+    gameMap map;
 };
 
 #endif // MAINWINDOW_H

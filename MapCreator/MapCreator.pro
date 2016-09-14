@@ -15,11 +15,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     advancedqlabel.cpp \
-    sizemapdialog.cpp
+    sizemapdialog.cpp \
+    gamemap.cpp
 
 HEADERS  += mainwindow.h \
     advancedqlabel.h \
-    sizemapdialog.h
+    sizemapdialog.h \
+    gamemap.h
 
 FORMS    += mainwindow.ui \
     sizemapdialog.ui

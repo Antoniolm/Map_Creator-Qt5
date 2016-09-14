@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
         hBox = new QHBoxLayout();
         for(int j=0;j<40;j++){
            label=new AdvancedQLabel("");
-           connect(label,SIGNAL(clicked()),this,SLOT(onChanged()));
+           connect(label,SIGNAL(clicked()),this,SLOT(onClicked()));
            visibleMap.append(label);
            hBox->addWidget(label);
         }
@@ -61,22 +61,37 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-///
+//////////////////////
 /// \brief MainWindow::onChanged
 ///
-void MainWindow::onChanged(){
+//////////////////////
+void MainWindow::onClicked(){
 
     QPoint p = this->mapFromGlobal(QCursor::pos());
     AdvancedQLabel* label= static_cast<AdvancedQLabel*>(this->childAt(p.x(),p.y()));
     label->setStyleSheet("QLabel {background: blue;}");
 }
 
-///
+///////////////////////
 /// \brief MainWindow::on_actionNew_File_triggered
 ///
+//////////////////////
 void MainWindow::on_actionNew_File_triggered()
 {
     sizeMapDialog *sizeMapDia=new sizeMapDialog();
     sizeMapDia->exec();
     std::pair<int,int> size=sizeMapDia->getSize();
+
+    map.setSizeMap(size);
+
+    std::pair<int,int> numPage;
+    numPage.first=size.first/30;
+    numPage.second=size.second/40;
+
+    if(size.first%30 != 0) numPage.first++;
+    if(size.second%40 != 0) numPage.second++;
+
+    map.setNumPages(numPage);
+
+    delete sizeMapDia;
 }
