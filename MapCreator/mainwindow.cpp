@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->line_section->setContentsMargins(0,0,0,0);
+    ui->line_section->setFixedWidth(5);
     //QScrollArea* scrollArea = new QScrollArea;
     //scrollArea->setWidget(this);
     //Creamos la sección del mapa
@@ -35,7 +37,8 @@ MainWindow::~MainWindow()
 /////////////////
 void MainWindow::createMapSection(){
     AdvancedQLabel *label;
-    ui->map_section->setAlignment(Qt::AlignLeft);
+    ui->map_section->setAlignment(Qt::AlignCenter);
+
     //Creamos los botones para el movimiento por el mapa y vamos añadiendolos al
     //layout principal
     buttonLeft= new QPushButton("left");
@@ -84,7 +87,8 @@ void MainWindow::createMapSection(){
 
     ui->map_section->addWidget(buttonRight);
     ui->map_section->setSpacing(0);
-
+    ui->map_section->setMargin(0);
+    ui->map_section->setContentsMargins(-5,-5,-5,-5);
 
 }
 
@@ -103,6 +107,8 @@ void MainWindow::createTextureSection(){
     textura=new TextureQLabel();
     hBox->addLayout(textura);
     ui->texture_section->addLayout(hBox);
+    ui->texture_section->setMargin(0);
+    ui->texture_section->setContentsMargins(-5,-5,-5,-5);
 
 }
 
