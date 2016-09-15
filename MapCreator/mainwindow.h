@@ -38,6 +38,8 @@ private slots:
     void on_buttonRight();
 
 private:
+    void createMapSection();
+    void createTextureSection();
     Ui::MainWindow *ui;
     QPushButton *buttonUp,*buttonDown,*buttonLeft,*buttonRight;
     QList<AdvancedQLabel*> visibleMap;

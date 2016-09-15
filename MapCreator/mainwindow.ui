@@ -28,7 +28,11 @@
        </layout>
       </widget>
       <widget class="QWidget" name="verticalLayoutWidget">
-       <layout class="QVBoxLayout" name="texture_section"/>
+       <layout class="QVBoxLayout" name="texture_section">
+        <item>
+         <widget class="QComboBox" name="textureList"/>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>

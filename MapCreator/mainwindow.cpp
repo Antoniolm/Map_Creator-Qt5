@@ -15,6 +15,24 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //Creamos la sección del mapa
+    createMapSection();
+
+    //Creamos la sección de las texturas
+    createTextureSection();
+
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+///////////////////
+/// \brief MainWindow::createMapSection
+/// Método para la creación de la sección del mapa
+/////////////////
+void MainWindow::createMapSection(){
     AdvancedQLabel *label;
 
     //Creamos los botones para el movimiento por el mapa y vamos añadiendolos al
@@ -66,15 +84,24 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->map_section->addWidget(buttonRight);
     ui->map_section->setSpacing(0);
 
-    ui->texture_section->setAlignment(Qt::AlignTop);
-    TextureQLabel *textura=new TextureQLabel();
-    ui->texture_section->addLayout(textura);
-
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
+///////////////////
+/// \brief MainWindow::createTextureSection
+/// Método para la creación de la sección para las texturas
+//////////////////
+void MainWindow::createTextureSection(){
+    QHBoxLayout *hBox=new QHBoxLayout();
+
+    ui->texture_section->setAlignment(Qt::AlignTop);
+    TextureQLabel *textura=new TextureQLabel();
+    hBox->addLayout(textura);
+    textura=new TextureQLabel();
+    hBox->addLayout(textura);
+    textura=new TextureQLabel();
+    hBox->addLayout(textura);
+    ui->texture_section->addLayout(hBox);
+
 }
 
 //////////////////////

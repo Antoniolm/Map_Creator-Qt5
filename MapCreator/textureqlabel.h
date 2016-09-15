@@ -9,6 +9,7 @@
 
 #include <QVBoxLayout>
 #include <advancedqlabel.h>
+#include <qpixmap.h>
 
 class TextureQLabel : public QVBoxLayout
 {
