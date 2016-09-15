@@ -22,17 +22,18 @@
       </property>
       <widget class="QWidget" name="horizontalLayoutWidget">
        <layout class="QHBoxLayout" name="map_section">
-        <property name="sizeConstraint">
-         <enum>QLayout::SetFixedSize</enum>
+        <property name="rightMargin">
+         <number>11</number>
         </property>
        </layout>
       </widget>
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
       <widget class="QWidget" name="verticalLayoutWidget">
-       <layout class="QVBoxLayout" name="texture_section">
-        <item>
-         <widget class="QComboBox" name="textureList"/>
-        </item>
-       </layout>
+       <layout class="QVBoxLayout" name="texture_section"/>
       </widget>
      </widget>
     </item>

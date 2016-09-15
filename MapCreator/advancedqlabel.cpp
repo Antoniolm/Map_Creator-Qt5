@@ -10,8 +10,13 @@ AdvancedQLabel::AdvancedQLabel(QString string,QWidget *parent) : QLabel(parent)
 {
     setText(string);
     setStyleSheet("QLabel {background: gray;border:1px solid black;}");
-    setFixedHeight(20);
-    setFixedWidth(20);
+    setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+    //setFixedHeight(20);
+    setMinimumHeight(10);
+    setMaximumHeight(30);
+    setMinimumWidth(10);
+    setMaximumWidth(30);
+    //setFixedWidth(20);
     connect(this,SIGNAL(clicked()),this,SLOT(slotClicked()));
 }
 

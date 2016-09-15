@@ -9,16 +9,22 @@
 TextureQLabel::TextureQLabel(QWidget *parent) : QVBoxLayout(parent)
 {
     texture=new QLabel("");
-    texture->setFixedHeight(50);
-    texture->setFixedWidth(50);
-    //texture->setStyleSheet("QLabel {background: blue;}");
+    texture->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+    texture->setMinimumHeight(50);
+    texture->setMinimumWidth(50);
+    texture->setMaximumHeight(100);
+    texture->setMaximumWidth(100);
+    texture->setStyleSheet("QLabel {background: blue;}");
     QPixmap pixmap(":/texture/texture/default.png");
     texture->setPixmap(pixmap);
     texture->show();
 
     stateTexture=new QLabel("");
-    stateTexture->setFixedHeight(10);
-    stateTexture->setFixedWidth(50);
+    stateTexture->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+    stateTexture->setMinimumHeight(10);
+    stateTexture->setMinimumWidth(10);
+    stateTexture->setMaximumHeight(30);
+    stateTexture->setMaximumWidth(100);
     stateTexture->setStyleSheet("QLabel {background: red;}");
 
 
