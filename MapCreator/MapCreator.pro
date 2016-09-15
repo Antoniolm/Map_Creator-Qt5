@@ -16,12 +16,17 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     advancedqlabel.cpp \
     sizemapdialog.cpp \
-    gamemap.cpp
+    gamemap.cpp \
+    textureqlabel.cpp
 
 HEADERS  += mainwindow.h \
     advancedqlabel.h \
     sizemapdialog.h \
-    gamemap.h
+    gamemap.h \
+    textureqlabel.h
 
 FORMS    += mainwindow.ui \
     sizemapdialog.ui
+
+RESOURCES += \
+    resource.qrc

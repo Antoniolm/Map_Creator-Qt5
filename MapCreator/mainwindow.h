@@ -13,6 +13,7 @@
 #include <advancedqlabel.h>
 #include <QPushButton>
 #include <gamemap.h>
+#include <textureqlabel.h>
 
 namespace Ui {
 class MainWindow;

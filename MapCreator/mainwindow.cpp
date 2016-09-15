@@ -65,6 +65,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->map_section->addWidget(buttonRight);
     ui->map_section->setSpacing(0);
+
+    ui->texture_section->setAlignment(Qt::AlignTop);
+    TextureQLabel *textura=new TextureQLabel();
+    ui->texture_section->addLayout(textura);
+
 }
 
 MainWindow::~MainWindow()
