@@ -18,6 +18,7 @@ public:
     void mousePressEvent(QMouseEvent *ev);
     void setImgTexture(QString);
     QString getImgTexture();
+    void loadTexture();
 signals:
     void clicked();
 public slots:

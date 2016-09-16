@@ -61,3 +61,19 @@ QString AdvancedQLabel::getImgTexture(){
     return imgTexture;
 
 }
+
+////////////////////////
+/// \brief AdvancedQLabel::loadTexture
+///  Realizara la carga en el QLabel de la imagen
+///  si hay una imagen
+///////////////////
+void AdvancedQLabel::loadTexture(){
+    if(!imgTexture.isEmpty()){
+        QPixmap pixmap(":/texture/texture/"+imgTexture);
+        setPixmap(pixmap.scaled(this->width(),this->height(),Qt::IgnoreAspectRatio, Qt::FastTransformation));
+        show();
+    }
+
+
+}
+

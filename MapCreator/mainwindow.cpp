@@ -130,7 +130,12 @@ void MainWindow::onClicked(){
     QPoint p = this->mapFromGlobal(QCursor::pos());
     AdvancedQLabel* label= static_cast<AdvancedQLabel*>(this->childAt(p.x(),p.y()));
     //label->setStyleSheet("QLabel {background: blue;}");
-   // label->set
+    // label->set
+
+    if(!currentTexture.isEmpty()){
+        label->setImgTexture(currentTexture);
+        label->loadTexture();
+    }
 }
 
 
