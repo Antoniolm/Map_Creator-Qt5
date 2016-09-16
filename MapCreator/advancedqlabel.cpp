@@ -23,7 +23,9 @@ AdvancedQLabel::AdvancedQLabel(QString imgTextu,int minH,int minW,int maxH,int m
     else{
         imgTexture=imgTextu;
         QPixmap pixmap(":/texture/texture/"+imgTexture);
+        pixmap=pixmap.scaled(this->width(),this->height(),Qt::IgnoreAspectRatio, Qt::FastTransformation);
         setPixmap(pixmap);
+        setGeometry(50,50,pixmap.width(),pixmap.height());
         show();
     }
 
@@ -70,7 +72,7 @@ QString AdvancedQLabel::getImgTexture(){
 void AdvancedQLabel::loadTexture(){
     if(!imgTexture.isEmpty()){
         QPixmap pixmap(":/texture/texture/"+imgTexture);
-        setPixmap(pixmap.scaled(this->width(),this->height(),Qt::IgnoreAspectRatio, Qt::FastTransformation));
+        setPixmap(pixmap.scaled(this->width()-2,this->height()-2.5,Qt::IgnoreAspectRatio, Qt::FastTransformation));
         show();
     }
 

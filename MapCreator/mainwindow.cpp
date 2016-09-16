@@ -8,6 +8,7 @@
 #include "ui_mainwindow.h"
 #include <QGraphicsItem>
 #include <QGraphicsView>
+#include <database.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -23,6 +24,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Creamos la sección de las texturas
     createTextureSection();
+
+    DataBase db();
+
 
 }
 
@@ -62,7 +66,7 @@ void MainWindow::createMapSection(){
     for(int i=0;i<30;i++){
         hBox = new QHBoxLayout();
         for(int j=0;j<40;j++){
-           label=new AdvancedQLabel("",10,10,30,30);
+           label=new AdvancedQLabel("",15,15,30,30);
            connect(label,SIGNAL(clicked()),this,SLOT(onClicked()));
            visibleMap.append(label);
            hBox->addWidget(label);
@@ -98,22 +102,42 @@ void MainWindow::createMapSection(){
 //////////////////
 void MainWindow::createTextureSection(){
     QHBoxLayout *hBox=new QHBoxLayout();
+    //QvBoxLayout
+
+    QScrollArea* scrollArea = new QScrollArea;
+    scrollArea = new QScrollArea;
+    scrollArea->setHorizontalScrollBarPolicy (Qt::ScrollBarAlwaysOff);
+    scrollArea->setVerticalScrollBarPolicy (Qt::ScrollBarAsNeeded);
+    scrollArea->setAlignment(Qt::AlignTop | Qt::AlignCenter);
+    scrollArea->setMinimumWidth(250);
+    scrollArea->setMaximumWidth(300);
+    scrollArea->setWidgetResizable (true);
+    ui->texture_section->addWidget(scrollArea);
 
     ui->texture_section->setAlignment(Qt::AlignTop | Qt::AlignCenter);
+    AdvancedQLabel *textura;
+    //for(int i=0;i<20;i++){
+        textura=new AdvancedQLabel("default.png",50,50,80,80);
+        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
+        hBox->addWidget(textura);
 
-    AdvancedQLabel *textura=new AdvancedQLabel("default.png",30,30,60,80);
-    connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
-    hBox->addWidget(textura);
+        textura=new AdvancedQLabel("default.png",50,50,80,80);
+        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
+        hBox->addWidget(textura);
 
-    textura=new AdvancedQLabel("default.png",30,30,60,80);
-    connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
-    hBox->addWidget(textura);
+        textura=new AdvancedQLabel("tierra.png",50,50,80,80);
+        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
+        hBox->addWidget(textura);
 
-    textura=new AdvancedQLabel("tierra.png",30,30,60,80);
-    connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
+        textura=new AdvancedQLabel("tierra.png",50,50,80,80);
+        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
+        hBox->addWidget(textura);
 
-    hBox->addWidget(textura);
-    ui->texture_section->addLayout(hBox);
+        scrollArea->setLayout(hBox);
+        //ui->texture_section->addLayout(hBox);
+        hBox=new QHBoxLayout();
+    //}
+
     ui->texture_section->setMargin(0);
     ui->texture_section->setContentsMargins(-5,-5,-5,-5);
 
