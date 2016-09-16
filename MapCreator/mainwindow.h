@@ -36,6 +36,7 @@ private slots:
     void on_buttonDown();
     void on_buttonLeft();
     void on_buttonRight();
+    void on_SelectTexture();
 
 private:
     void createMapSection();
@@ -45,6 +46,7 @@ private:
     QList<AdvancedQLabel*> visibleMap;
     gameMap map;
     QLabel *nameSection;
+    QString currentTexture;
 };
 
 #endif // MAINWINDOW_H

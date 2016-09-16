@@ -62,7 +62,7 @@ void MainWindow::createMapSection(){
     for(int i=0;i<30;i++){
         hBox = new QHBoxLayout();
         for(int j=0;j<40;j++){
-           label=new AdvancedQLabel("");
+           label=new AdvancedQLabel("",10,10,30,30);
            connect(label,SIGNAL(clicked()),this,SLOT(onClicked()));
            visibleMap.append(label);
            hBox->addWidget(label);
@@ -100,12 +100,19 @@ void MainWindow::createTextureSection(){
     QHBoxLayout *hBox=new QHBoxLayout();
 
     ui->texture_section->setAlignment(Qt::AlignTop | Qt::AlignCenter);
-    TextureQLabel *textura=new TextureQLabel();
-    hBox->addLayout(textura);
-    textura=new TextureQLabel();
-    hBox->addLayout(textura);
-    textura=new TextureQLabel();
-    hBox->addLayout(textura);
+
+    AdvancedQLabel *textura=new AdvancedQLabel("default.png",30,30,60,80);
+    connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
+    hBox->addWidget(textura);
+
+    textura=new AdvancedQLabel("default.png",30,30,60,80);
+    connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
+    hBox->addWidget(textura);
+
+    textura=new AdvancedQLabel("tierra.png",30,30,60,80);
+    connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
+
+    hBox->addWidget(textura);
     ui->texture_section->addLayout(hBox);
     ui->texture_section->setMargin(0);
     ui->texture_section->setContentsMargins(-5,-5,-5,-5);
@@ -122,7 +129,19 @@ void MainWindow::onClicked(){
 
     QPoint p = this->mapFromGlobal(QCursor::pos());
     AdvancedQLabel* label= static_cast<AdvancedQLabel*>(this->childAt(p.x(),p.y()));
-    label->setStyleSheet("QLabel {background: blue;}");
+    //label->setStyleSheet("QLabel {background: blue;}");
+   // label->set
+}
+
+
+///
+/// \brief MainWindow::on_SelectTexture
+///
+void MainWindow::on_SelectTexture(){
+    QPoint p = this->mapFromGlobal(QCursor::pos());
+    AdvancedQLabel *label= static_cast<AdvancedQLabel*>(this->childAt(p.x(),p.y()));
+    currentTexture=label->getImgTexture();
+
 }
 
 //////////////////////////////////
