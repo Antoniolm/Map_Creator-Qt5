@@ -130,7 +130,7 @@ void MainWindow::createTextureSection(){
     ui->texture_section->setAlignment(Qt::AlignTop | Qt::AlignCenter);
 
     //Realizamos la carga de las texturas
-    for(int i=0;i<10;i++){
+    //for(int i=0;i<10;i++){
         textura=new AdvancedQLabel("default.png",30,30,30,30);
         connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
         item = new QListWidgetItem();
@@ -149,7 +149,79 @@ void MainWindow::createTextureSection(){
         ui->textureListWidget->addItem(item);
         ui->textureListWidget->setItemWidget(item,textura);
 
-    }
+        textura=new AdvancedQLabel("BorderInfDch.png",30,30,30,30);
+        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
+        item = new QListWidgetItem();
+        item->setText("BorderInfDch");
+        item->setTextAlignment(Qt::AlignCenter);
+        item->setSizeHint(QSize(0,40));
+        ui->textureListWidget->addItem(item);
+        ui->textureListWidget->setItemWidget(item,textura);
+
+        textura=new AdvancedQLabel("BorderInfIzq.png",30,30,30,30);
+        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
+        item = new QListWidgetItem();
+        item->setText("BorderInfIzq");
+        item->setTextAlignment(Qt::AlignCenter);
+        item->setSizeHint(QSize(0,40));
+        ui->textureListWidget->addItem(item);
+        ui->textureListWidget->setItemWidget(item,textura);
+
+        textura=new AdvancedQLabel("BorderSupDch.png",30,30,30,30);
+        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
+        item = new QListWidgetItem();
+        item->setText("BorderSupDch");
+        item->setTextAlignment(Qt::AlignCenter);
+        item->setSizeHint(QSize(0,40));
+        ui->textureListWidget->addItem(item);
+        ui->textureListWidget->setItemWidget(item,textura);
+
+        textura=new AdvancedQLabel("BorderSupIzq.png",30,30,30,30);
+        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
+        item = new QListWidgetItem();
+        item->setText("BorderSupIzq");
+        item->setTextAlignment(Qt::AlignCenter);
+        item->setSizeHint(QSize(0,40));
+        ui->textureListWidget->addItem(item);
+        ui->textureListWidget->setItemWidget(item,textura);
+
+        textura=new AdvancedQLabel("tierraIzq.png",30,30,30,30);
+        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
+        item = new QListWidgetItem();
+        item->setText("tierraIzq");
+        item->setTextAlignment(Qt::AlignCenter);
+        item->setSizeHint(QSize(0,40));
+        ui->textureListWidget->addItem(item);
+        ui->textureListWidget->setItemWidget(item,textura);
+
+        textura=new AdvancedQLabel("tierraDch.png",30,30,30,30);
+        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
+        item = new QListWidgetItem();
+        item->setText("tierraDch");
+        item->setTextAlignment(Qt::AlignCenter);
+        item->setSizeHint(QSize(0,40));
+        ui->textureListWidget->addItem(item);
+        ui->textureListWidget->setItemWidget(item,textura);
+
+        textura=new AdvancedQLabel("tierraInf.png",30,30,30,30);
+        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
+        item = new QListWidgetItem();
+        item->setText("tierraInf");
+        item->setTextAlignment(Qt::AlignCenter);
+        item->setSizeHint(QSize(0,40));
+        ui->textureListWidget->addItem(item);
+        ui->textureListWidget->setItemWidget(item,textura);
+
+        textura=new AdvancedQLabel("tierraDeep.png",30,30,30,30);
+        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
+        item = new QListWidgetItem();
+        item->setText("tierraDeep");
+        item->setTextAlignment(Qt::AlignCenter);
+        item->setSizeHint(QSize(0,40));
+        ui->textureListWidget->addItem(item);
+        ui->textureListWidget->setItemWidget(item,textura);
+
+    //}
 
 
 

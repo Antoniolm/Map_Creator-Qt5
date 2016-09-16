@@ -2,5 +2,13 @@
     <qresource prefix="/texture">
         <file>texture/default.png</file>
         <file>texture/tierra.png</file>
+        <file>texture/BorderInfDch.png</file>
+        <file>texture/BorderInfIzq.png</file>
+        <file>texture/BorderSupDch.png</file>
+        <file>texture/BorderSupIzq.png</file>
+        <file>texture/tierraInf.png</file>
+        <file>texture/tierraIzq.png</file>
+        <file>texture/tierraDeep.png</file>
+        <file>texture/tierraDch.png</file>
     </qresource>
 </RCC>
