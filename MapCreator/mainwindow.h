@@ -14,6 +14,7 @@
 #include <QPushButton>
 #include <gamemap.h>
 #include <textureqlabel.h>
+#include <QListWidgetItem>
 
 namespace Ui {
 class MainWindow;

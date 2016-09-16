@@ -37,6 +37,9 @@
         <item>
          <widget class="QComboBox" name="texture_list"/>
         </item>
+        <item>
+         <widget class="QListWidget" name="textureListWidget"/>
+        </item>
        </layout>
       </widget>
      </widget>

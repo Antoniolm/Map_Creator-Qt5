@@ -9,6 +9,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsView>
 #include <database.h>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -102,44 +103,35 @@ void MainWindow::createMapSection(){
 //////////////////
 void MainWindow::createTextureSection(){
     QHBoxLayout *hBox=new QHBoxLayout();
-    //QvBoxLayout
+    QVBoxLayout *vBox=new QVBoxLayout();
 
-    QScrollArea* scrollArea = new QScrollArea;
-    scrollArea = new QScrollArea;
-    scrollArea->setHorizontalScrollBarPolicy (Qt::ScrollBarAlwaysOff);
-    scrollArea->setVerticalScrollBarPolicy (Qt::ScrollBarAsNeeded);
-    scrollArea->setAlignment(Qt::AlignTop | Qt::AlignCenter);
-    scrollArea->setMinimumWidth(250);
-    scrollArea->setMaximumWidth(300);
-    scrollArea->setWidgetResizable (true);
-    ui->texture_section->addWidget(scrollArea);
-
-    ui->texture_section->setAlignment(Qt::AlignTop | Qt::AlignCenter);
-    AdvancedQLabel *textura;
-    //for(int i=0;i<20;i++){
-        textura=new AdvancedQLabel("default.png",50,50,80,80);
-        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
-        hBox->addWidget(textura);
-
-        textura=new AdvancedQLabel("default.png",50,50,80,80);
-        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
-        hBox->addWidget(textura);
-
-        textura=new AdvancedQLabel("tierra.png",50,50,80,80);
-        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
-        hBox->addWidget(textura);
-
-        textura=new AdvancedQLabel("tierra.png",50,50,80,80);
-        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
-        hBox->addWidget(textura);
-
-        scrollArea->setLayout(hBox);
-        //ui->texture_section->addLayout(hBox);
-        hBox=new QHBoxLayout();
-    //}
-
+    connect(ui->textureListWidget,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(on_SelectTexture()));
     ui->texture_section->setMargin(0);
     ui->texture_section->setContentsMargins(-5,-5,-5,-5);
+    ui->texture_section->setAlignment(Qt::AlignTop | Qt::AlignCenter);
+
+
+    AdvancedQLabel *textura;
+    QListWidgetItem *item;
+    for(int i=0;i<10;i++){
+        textura=new AdvancedQLabel("default.png",30,30,30,30);
+        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
+        item = new QListWidgetItem();
+        item->setText("default.png");
+        item->setSizeHint(QSize(0,40));
+        ui->textureListWidget->addItem(item);
+        ui->textureListWidget->setItemWidget(item,textura);
+
+        textura=new AdvancedQLabel("tierra.png",30,30,30,30);
+        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
+        item = new QListWidgetItem();
+        item->setSizeHint(QSize(0,40));
+        ui->textureListWidget->addItem(item);
+        ui->textureListWidget->setItemWidget(item,textura);
+
+    }
+
+
 
 }
 
@@ -163,14 +155,19 @@ void MainWindow::onClicked(){
 }
 
 
-///
+//////////////////////
 /// \brief MainWindow::on_SelectTexture
-///
+/// Método activado cuando se clickea una textura
+/// Seleccionara la textura para usarla en nuestro mapa
+//////////////////////
 void MainWindow::on_SelectTexture(){
-    QPoint p = this->mapFromGlobal(QCursor::pos());
-    AdvancedQLabel *label= static_cast<AdvancedQLabel*>(this->childAt(p.x(),p.y()));
-    currentTexture=label->getImgTexture();
-
+    QListWidgetItem *item=ui->textureListWidget->currentItem();
+    qDebug()<< "El texto es : "+item->text();
+    //QPoint p = this->mapFromGlobal(QCursor::pos());
+    //AdvancedQLabel *label= static_cast<AdvancedQLabel*>(this->childAt(p.x(),p.y()));
+    //label->
+    currentTexture=item->text();//;label->getImgTexture();
+    //QObject::property()
 }
 
 //////////////////////////////////
