@@ -72,7 +72,7 @@ QString AdvancedQLabel::getImgTexture(){
 void AdvancedQLabel::loadTexture(){
     if(!imgTexture.isEmpty()){
         QPixmap pixmap(":/texture/texture/"+imgTexture);
-        setPixmap(pixmap.scaled(this->width()-2,this->height()-2.5,Qt::IgnoreAspectRatio, Qt::FastTransformation));
+        setPixmap(pixmap.scaled(this->width()-2,this->height()-3,Qt::IgnoreAspectRatio, Qt::FastTransformation));
         show();
     }
 

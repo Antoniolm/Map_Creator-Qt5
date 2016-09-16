@@ -18,8 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->line_section->setContentsMargins(0,0,0,0);
     ui->line_section->setFixedWidth(5);
-    //QScrollArea* scrollArea = new QScrollArea;
-    //scrollArea->setWidget(this);
+
     //Creamos la sección del mapa
     createMapSection();
 
@@ -34,6 +33,20 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+//////////////
+/// \brief MyMainWindow::resizeEvent
+/// \param event
+/// Reimplementación del evento resize para que cuando se realice un cambio de
+/// tamaño de la ventana principal se realice un ajuste de las imagenes de nuestro mapa
+//////////////////////////////////
+void MainWindow::resizeEvent(QResizeEvent* event)
+{
+   QMainWindow::resizeEvent(event);
+
+   foreach(AdvancedQLabel *label , visibleMap)
+       label->loadTexture();
 }
 
 ///////////////////
@@ -66,7 +79,7 @@ void MainWindow::createMapSection(){
     //30x40 de AdvancedQLabel
     for(int i=0;i<30;i++){
         hBox = new QHBoxLayout();
-        for(int j=0;j<40;j++){
+        for(int j=0;j<50;j++){
            label=new AdvancedQLabel("",15,15,30,30);
            connect(label,SIGNAL(clicked()),this,SLOT(onClicked()));
            visibleMap.append(label);
@@ -102,22 +115,27 @@ void MainWindow::createMapSection(){
 /// Método para la creación de la sección para las texturas
 //////////////////
 void MainWindow::createTextureSection(){
-    QHBoxLayout *hBox=new QHBoxLayout();
-    QVBoxLayout *vBox=new QVBoxLayout();
+    AdvancedQLabel *textura;
+    QListWidgetItem *item;
 
+    //Configuramos nuestro textureListWidget y texture_Section
+    ui->textureListWidget->setMinimumHeight(300);
+    ui->textureListWidget->setMinimumWidth(250);
+    ui->textureListWidget->setMaximumHeight(600);
+    ui->textureListWidget->setMaximumWidth(300);
     connect(ui->textureListWidget,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(on_SelectTexture()));
+
     ui->texture_section->setMargin(0);
     ui->texture_section->setContentsMargins(-5,-5,-5,-5);
     ui->texture_section->setAlignment(Qt::AlignTop | Qt::AlignCenter);
 
-
-    AdvancedQLabel *textura;
-    QListWidgetItem *item;
+    //Realizamos la carga de las texturas
     for(int i=0;i<10;i++){
         textura=new AdvancedQLabel("default.png",30,30,30,30);
         connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
         item = new QListWidgetItem();
-        item->setText("default.png");
+        item->setText("default");
+        item->setTextAlignment(Qt::AlignCenter);
         item->setSizeHint(QSize(0,40));
         ui->textureListWidget->addItem(item);
         ui->textureListWidget->setItemWidget(item,textura);
@@ -125,6 +143,8 @@ void MainWindow::createTextureSection(){
         textura=new AdvancedQLabel("tierra.png",30,30,30,30);
         connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
         item = new QListWidgetItem();
+        item->setText("tierra");
+        item->setTextAlignment(Qt::AlignCenter);
         item->setSizeHint(QSize(0,40));
         ui->textureListWidget->addItem(item);
         ui->textureListWidget->setItemWidget(item,textura);
@@ -145,8 +165,6 @@ void MainWindow::onClicked(){
 
     QPoint p = this->mapFromGlobal(QCursor::pos());
     AdvancedQLabel* label= static_cast<AdvancedQLabel*>(this->childAt(p.x(),p.y()));
-    //label->setStyleSheet("QLabel {background: blue;}");
-    // label->set
 
     if(!currentTexture.isEmpty()){
         label->setImgTexture(currentTexture);
@@ -166,7 +184,7 @@ void MainWindow::on_SelectTexture(){
     //QPoint p = this->mapFromGlobal(QCursor::pos());
     //AdvancedQLabel *label= static_cast<AdvancedQLabel*>(this->childAt(p.x(),p.y()));
     //label->
-    currentTexture=item->text();//;label->getImgTexture();
+    currentTexture=item->text()+".png";//;label->getImgTexture();
     //QObject::property()
 }
 
@@ -275,10 +293,10 @@ void MainWindow::on_actionNew_File_triggered()
     //Configuramos el numero de secciones del mapa
     std::pair<int,int> numPage;
     numPage.first=size.first/30;
-    numPage.second=size.second/40;
+    numPage.second=size.second/50;
 
     if(size.first%30 != 0) numPage.first++;
-    if(size.second%40 != 0) numPage.second++;
+    if(size.second%50 != 0) numPage.second++;
     map.setNumPages(numPage);
 
     buttonRight->setEnabled(true);

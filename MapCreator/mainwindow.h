@@ -39,6 +39,10 @@ private slots:
     void on_buttonRight();
     void on_SelectTexture();
 
+
+protected:
+    void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
+
 private:
     void createMapSection();
     void createTextureSection();
