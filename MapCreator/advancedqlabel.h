@@ -19,6 +19,7 @@ public:
     void setImgTexture(QString);
     QString getImgTexture();
     void loadTexture();
+    bool hasTexture();
 signals:
     void clicked();
 public slots:

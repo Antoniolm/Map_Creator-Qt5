@@ -48,7 +48,7 @@ private:
     void createTextureSection();
     Ui::MainWindow *ui;
     QPushButton *buttonUp,*buttonDown,*buttonLeft,*buttonRight;
-    QList<AdvancedQLabel*> visibleMap;
+    QList<QList<AdvancedQLabel*>> visibleMap;
     gameMap map;
     QLabel *nameSection;
     QString currentTexture;

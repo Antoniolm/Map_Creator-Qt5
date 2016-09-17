@@ -75,7 +75,18 @@ void AdvancedQLabel::loadTexture(){
         setPixmap(pixmap.scaled(this->width()-2,this->height()-3,Qt::IgnoreAspectRatio, Qt::FastTransformation));
         show();
     }
+}
 
+///////////////////////////
+/// \brief AdvancedQLabel::isTexture
+/// \return
+/// Método para saber si la celda tiene una textura o no
+/////////////////////
+bool AdvancedQLabel::hasTexture(){
+    bool salida=true;
+    if(imgTexture.isEmpty())
+        salida=false;
 
+    return salida;
 }
 

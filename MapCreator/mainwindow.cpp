@@ -44,9 +44,12 @@ MainWindow::~MainWindow()
 void MainWindow::resizeEvent(QResizeEvent* event)
 {
    QMainWindow::resizeEvent(event);
+   qDebug()<< "Use the event";
 
-   foreach(AdvancedQLabel *label , visibleMap)
-       label->loadTexture();
+   //Actualizamos el tamaño de las texturas de nuestro mapa visible
+   for(int i=0;i<visibleMap.size();i++)
+       for(int j=0;j<visibleMap[i].size();j++)
+           visibleMap[i][j]->loadTexture();
 }
 
 ///////////////////
@@ -55,6 +58,7 @@ void MainWindow::resizeEvent(QResizeEvent* event)
 /////////////////
 void MainWindow::createMapSection(){
     AdvancedQLabel *label;
+    QList<AdvancedQLabel*> auxList; //lista auxiliar para rellenar visibleMap
     ui->map_section->setAlignment(Qt::AlignCenter);
 
     //Creamos los botones para el movimiento por el mapa y vamos añadiendolos al
@@ -76,15 +80,17 @@ void MainWindow::createMapSection(){
     vBox->addWidget(buttonUp);
 
     //Creamos la estructura principal del mapa
-    //30x40 de AdvancedQLabel
+    //30x50 de AdvancedQLabel
     for(int i=0;i<30;i++){
         hBox = new QHBoxLayout();
+        auxList.clear();
         for(int j=0;j<50;j++){
            label=new AdvancedQLabel("",15,15,30,30);
            connect(label,SIGNAL(clicked()),this,SLOT(onClicked()));
-           visibleMap.append(label);
+           auxList.append(label);
            hBox->addWidget(label);
         }
+        visibleMap.append(auxList);
         vBox->addLayout(hBox);
     }
 
@@ -376,9 +382,9 @@ void MainWindow::on_actionNew_File_triggered()
 
 
     //Actualizamos el color de nuestro mapa visible
-    for(int i=0;i<visibleMap.size();i++){
-        visibleMap[i]->setStyleSheet("QLabel {background: white;border:1px solid gray;}");
-    }
+    for(int i=0;i<visibleMap.size();i++)
+        for(int j=0;j<visibleMap[i].size();j++)
+            visibleMap[i][j]->setStyleSheet("QLabel {background: white;border:1px solid gray;}");
 
     delete sizeMapDia;
 }

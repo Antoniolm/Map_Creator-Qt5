@@ -9,23 +9,30 @@
 #define GAMEMAP_H
 
 #include <advancedqlabel.h>
+#include <cell.h>
+#include <QMap>
+
+using namespace std;
 
 class gameMap
 {
 public:
     gameMap();
-    void setNumPages(std::pair<int,int>);
-    void setSizeMap(std::pair<int,int>);
-    void setCurrentPage(std::pair<int,int>);
-    std::pair<int,int> getNumPages();
-    std::pair<int,int> getSizeMap();
-    std::pair<int,int> getCurrentPage();
+    void setNumPages(pair<int,int>);
+    void setSizeMap(pair<int,int>);
+    void setCurrentPage(pair<int,int>);
+    void setCurrentVisibleMap(QList<QList<AdvancedQLabel*>> &);
+    pair<int,int> getNumPages();
+    pair<int,int> getSizeMap();
+    pair<int,int> getCurrentPage();
+    QList<QList<AdvancedQLabel*>> getCurrentVisibleMap();
 
 private:
-    QList<AdvancedQLabel*> map;
-    std::pair<int,int> sizeMap;  //Nos indica el tamaño en celda de nuestro mapa <height,width>
-    std::pair<int,int> numPages; //Nos indica el numero de paginas total <height,width>
-    std::pair<int,int>currentPage; //Nos permite detectar que pagina del mapa es invisble
+    QMap<pair<int,int>,Cell> textureMap;
+    pair<int,int> sizeMap;  //Nos indica el tamaño en celda de nuestro mapa <height,width>
+    pair<int,int> numPages; //Nos indica el numero de paginas total <height,width>
+    pair<int,int> cellPerPages; //Numero de celdas por pagina
+    pair<int,int>currentPage; //Nos permite detectar que pagina del mapa es invisble
 };
 
 #endif // GAMEMAP_H

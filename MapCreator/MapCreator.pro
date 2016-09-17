@@ -18,13 +18,15 @@ SOURCES += main.cpp\
     advancedqlabel.cpp \
     sizemapdialog.cpp \
     gamemap.cpp \
-    database.cpp
+    database.cpp \
+    cell.cpp
 
 HEADERS  += mainwindow.h \
     advancedqlabel.h \
     sizemapdialog.h \
     gamemap.h \
-    database.h
+    database.h \
+    cell.h
 
 FORMS    += mainwindow.ui \
     sizemapdialog.ui
