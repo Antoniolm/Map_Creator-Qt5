@@ -90,3 +90,13 @@ bool AdvancedQLabel::hasTexture(){
     return salida;
 }
 
+////////////////////
+/// \brief AdvancedQLabel::clear
+/// Método para limpiar nuestro objecto
+/// sin perder su configuración inicial
+////////////////////
+void AdvancedQLabel::clear(){
+    imgTexture.clear();
+    QPixmap pixmap("");
+    setPixmap(pixmap);
+}

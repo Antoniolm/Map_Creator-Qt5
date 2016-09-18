@@ -1,0 +1,112 @@
+///////////////////////////////////////////
+///
+/// @author Antonio David López Machado
+///
+///////////////////////////////////////////
+
+
+#include "gamemap.h"
+
+gameMap::gameMap()
+{
+    numPages.first=0;
+    numPages.second=0;
+
+    sizeMap.first=0;
+    sizeMap.second=0;
+
+    currentPage.first=0;
+    currentPage.second=0;
+
+    cellPerPages.first=30;
+    cellPerPages.second=50;
+}
+
+///
+/// \brief gameMap::setNumPages
+/// \param aNumPages
+///
+void gameMap::setNumPages(pair<int,int> aNumPages){
+    numPages=aNumPages;
+}
+
+///
+/// \brief gameMap::setSizeMap
+/// \param aSizeMap
+///
+void gameMap::setSizeMap(pair<int,int> aSizeMap){
+    sizeMap=aSizeMap;
+}
+
+///
+/// \brief gameMap::setCurrentPage
+/// \param aCPage
+///
+void gameMap::setCurrentPage(pair<int,int> aCPage){
+   currentPage=aCPage;
+}
+
+////////////////
+/// \brief setCurrentVisibleMap
+/// \param visibleMap
+///
+/////////////////////////
+void gameMap::setCurrentVisibleMap(QList<QList<AdvancedQLabel*>> &visibleMap){
+    Cell auxCell;
+
+    for(int i=0;i<visibleMap.size();i++)
+        for(int j=0;j<visibleMap[i].size();j++){
+            if(visibleMap[i][j]->hasTexture())
+                auxCell.setImgTexture(visibleMap[i][j]->getImgTexture());
+                QDebug()<< "Textura cargada en nuestro map x: "+((cellPerPages.first*currentPage.first)+i)+ " y:"+((cellPerPages.second*currentPage.second)+j);
+                textureMap.insert(make_pair((cellPerPages.first*currentPage.first)+i,(cellPerPages.second*currentPage.second)+j),auxCell);
+        }
+
+}
+
+///
+/// \brief gameMap::getNumPages
+/// \return
+///
+pair<int,int> gameMap::getNumPages(){
+    return numPages;
+}
+
+///
+/// \brief gameMap::getSizeMap
+/// \return
+///
+pair<int,int> gameMap::getSizeMap(){
+    return sizeMap;
+}
+
+///
+/// \brief gameMap::getCurrentPage
+/// \return
+///
+pair<int,int> gameMap::getCurrentPage(){
+    return currentPage;
+}
+
+///
+/// \brief getCurrentVisibleMap
+/// \return
+///
+QList<QList<AdvancedQLabel*>> gameMap::getCurrentVisibleMap(){
+    QList<QList<AdvancedQLabel*>> salida;
+    QList<AdvancedQLabel*> auxQList;
+    int initHeight=currentPage.first*cellPerPages.first;
+    int initWidth=currentPage.second*cellPerPages.second;
+    int endHeight=initHeight+cellPerPages.first;
+    int endWidth=initWidth+cellPerPages.second;
+
+    /*for(int i=initHeight;i<endHeight;i++)
+        for(int j=initWidth;j<endWidth;j++){
+           QMap<pair<int,int>,Cell>::iterator it=textureMap.find(make_pair(i,j));
+           if((*it)==NULL){
+                //Continue here
+           }
+        }*/
+
+    return salida;
+}

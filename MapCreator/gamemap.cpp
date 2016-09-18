@@ -20,7 +20,22 @@ gameMap::gameMap()
 
     cellPerPages.first=30;
     cellPerPages.second=50;
+
+    QList<Cell> auxList;
+    Cell auxCell;
+    for(int i=0;i<cellPerPages.first;i++){
+        for(int j=0;j<cellPerPages.second;j++){
+            auxList.append(auxCell);
+        }
+        auxVisibleMap.append(auxList);
+        auxList.clear();
+    }
 }
+
+gameMap::~gameMap(){
+
+}
+
 
 ///
 /// \brief gameMap::setNumPages
@@ -53,14 +68,21 @@ void gameMap::setCurrentPage(pair<int,int> aCPage){
 /////////////////////////
 void gameMap::setCurrentVisibleMap(QList<QList<AdvancedQLabel*>> &visibleMap){
     Cell auxCell;
-
+    //qDebug()<< "Pagina<"+ QString::number(currentPage.first)+ ","+QString::number(currentPage.second)+">";
     for(int i=0;i<visibleMap.size();i++)
         for(int j=0;j<visibleMap[i].size();j++){
-            if(visibleMap[i][j]->hasTexture())
+            if(visibleMap[i][j]->hasTexture()){ //Si tiene textura cargada
                 auxCell.setImgTexture(visibleMap[i][j]->getImgTexture());
+                //qDebug()<< "Position<"+ QString::number((cellPerPages.first*currentPage.first)+i)+ ","+QString::number((cellPerPages.second*currentPage.second)+j)+">";
                 textureMap.insert(make_pair((cellPerPages.first*currentPage.first)+i,(cellPerPages.second*currentPage.second)+j),auxCell);
+            }
         }
-
+    /*pair<int,int> clave;
+    QMap<pair<int,int>,Cell>::Iterator it;
+    for(it=textureMap.begin();it!=textureMap.end();it++){
+            pair<int,int> clave=it.key();
+            qDebug()<<"Key<"+QString::number(clave.first)+","+QString::number(clave.second)+">"+"->"+(*it).getImgTexture();
+    }*/
 }
 
 ///
@@ -91,21 +113,37 @@ pair<int,int> gameMap::getCurrentPage(){
 /// \brief getCurrentVisibleMap
 /// \return
 ///
-QList<QList<AdvancedQLabel*>> gameMap::getCurrentVisibleMap(){
-    QList<QList<AdvancedQLabel*>> salida;
-    QList<AdvancedQLabel*> auxQList;
+QList<QList<Cell>> & gameMap::getCurrentVisibleMap(){
+
+    cleanVisibleMap();
     int initHeight=currentPage.first*cellPerPages.first;
     int initWidth=currentPage.second*cellPerPages.second;
     int endHeight=initHeight+cellPerPages.first;
     int endWidth=initWidth+cellPerPages.second;
 
-    for(int i=initHeight;i<endHeight;i++)
-        for(int j=initWidth;j<endWidth;j++){
-           QMap<pair<int,int>,Cell>::iterator it=textureMap.find(make_pair(i,j));
-           if((*it)==NULL){
-                //Continue here
-           }
-        }
+    pair<int,int> clave;
+    int visibleHeight,visibleWidth; //variables usadas para convertira a posiciones de mapa visible la posiciones del mapa
+    QMap<pair<int,int>,Cell>::Iterator it;
+    for(it=textureMap.begin();it!=textureMap.end();it++){
+            pair<int,int> clave=it.key();
+            visibleHeight=clave.first-(cellPerPages.first*currentPage.first);
+            visibleWidth=clave.second-(cellPerPages.second*currentPage.second);
 
-    return salida;
+            if((clave.first>=initHeight && clave.first<endHeight)&& (clave.second>=initWidth && clave.second<endWidth)){
+                auxVisibleMap[visibleHeight][visibleWidth].setImgTexture((*it).getImgTexture());
+            }
+            //qDebug()<<"Key<"+QString::number(clave.first)+","+QString::number(clave.second)+">"+"->"+(*it).getImgTexture();
+    }
+    return auxVisibleMap;
+}
+
+///
+/// \brief cleanVisibleMap
+///
+void gameMap::cleanVisibleMap(){
+    for(int i=0;i<cellPerPages.first;i++){
+        for(int j=0;j<cellPerPages.second;j++)
+            auxVisibleMap[i][j].clear();
+    }
+
 }

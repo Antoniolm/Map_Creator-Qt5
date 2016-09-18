@@ -138,7 +138,6 @@ void MainWindow::createTextureSection(){
     //Realizamos la carga de las texturas
     //for(int i=0;i<10;i++){
         textura=new AdvancedQLabel("default.png",30,30,30,30);
-        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
         item = new QListWidgetItem();
         item->setText("default");
         item->setTextAlignment(Qt::AlignCenter);
@@ -147,7 +146,6 @@ void MainWindow::createTextureSection(){
         ui->textureListWidget->setItemWidget(item,textura);
 
         textura=new AdvancedQLabel("tierra.png",30,30,30,30);
-        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
         item = new QListWidgetItem();
         item->setText("tierra");
         item->setTextAlignment(Qt::AlignCenter);
@@ -156,7 +154,6 @@ void MainWindow::createTextureSection(){
         ui->textureListWidget->setItemWidget(item,textura);
 
         textura=new AdvancedQLabel("BorderInfDch.png",30,30,30,30);
-        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
         item = new QListWidgetItem();
         item->setText("BorderInfDch");
         item->setTextAlignment(Qt::AlignCenter);
@@ -165,7 +162,6 @@ void MainWindow::createTextureSection(){
         ui->textureListWidget->setItemWidget(item,textura);
 
         textura=new AdvancedQLabel("BorderInfIzq.png",30,30,30,30);
-        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
         item = new QListWidgetItem();
         item->setText("BorderInfIzq");
         item->setTextAlignment(Qt::AlignCenter);
@@ -174,7 +170,6 @@ void MainWindow::createTextureSection(){
         ui->textureListWidget->setItemWidget(item,textura);
 
         textura=new AdvancedQLabel("BorderSupDch.png",30,30,30,30);
-        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
         item = new QListWidgetItem();
         item->setText("BorderSupDch");
         item->setTextAlignment(Qt::AlignCenter);
@@ -183,7 +178,6 @@ void MainWindow::createTextureSection(){
         ui->textureListWidget->setItemWidget(item,textura);
 
         textura=new AdvancedQLabel("BorderSupIzq.png",30,30,30,30);
-        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
         item = new QListWidgetItem();
         item->setText("BorderSupIzq");
         item->setTextAlignment(Qt::AlignCenter);
@@ -192,7 +186,6 @@ void MainWindow::createTextureSection(){
         ui->textureListWidget->setItemWidget(item,textura);
 
         textura=new AdvancedQLabel("tierraIzq.png",30,30,30,30);
-        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
         item = new QListWidgetItem();
         item->setText("tierraIzq");
         item->setTextAlignment(Qt::AlignCenter);
@@ -201,7 +194,6 @@ void MainWindow::createTextureSection(){
         ui->textureListWidget->setItemWidget(item,textura);
 
         textura=new AdvancedQLabel("tierraDch.png",30,30,30,30);
-        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
         item = new QListWidgetItem();
         item->setText("tierraDch");
         item->setTextAlignment(Qt::AlignCenter);
@@ -210,7 +202,6 @@ void MainWindow::createTextureSection(){
         ui->textureListWidget->setItemWidget(item,textura);
 
         textura=new AdvancedQLabel("tierraInf.png",30,30,30,30);
-        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
         item = new QListWidgetItem();
         item->setText("tierraInf");
         item->setTextAlignment(Qt::AlignCenter);
@@ -219,7 +210,6 @@ void MainWindow::createTextureSection(){
         ui->textureListWidget->setItemWidget(item,textura);
 
         textura=new AdvancedQLabel("tierraDeep.png",30,30,30,30);
-        connect(textura,SIGNAL(clicked()),this,SLOT(on_SelectTexture()));
         item = new QListWidgetItem();
         item->setText("tierraDeep");
         item->setTextAlignment(Qt::AlignCenter);
@@ -231,6 +221,23 @@ void MainWindow::createTextureSection(){
 
 
 
+}
+
+////////////////////////////
+/// \brief MainWindow::updateVisibleMap
+/// \param auxMap
+/// Método privado para actualizar nuestro mapa visible
+////////////////////////////
+void MainWindow::updateVisibleMap(QList<QList<Cell>> &auxMap){
+
+    for(int i=0;i<visibleMap.size();i++){
+        for(int j=0;j<visibleMap[i].size();j++){
+            visibleMap[i][j]->clear(); //limpiamos las texturas anteriores
+            if(auxMap[i][j].hasTexture()){
+                visibleMap[i][j]->setImgTexture(auxMap[i][j].getImgTexture());
+            }
+        }
+    }
 }
 
 //////////////////////
@@ -277,7 +284,10 @@ void MainWindow::on_buttonUp(){
     std::pair<int,int> numPages=map.getNumPages();
     std::pair<int,int> currPages=map.getCurrentPage();
 
+    map.setCurrentVisibleMap(visibleMap);
     currPages.first--;
+
+    updateVisibleMap(map.getCurrentVisibleMap());
 
     if(currPages.first==0)
         buttonUp->setEnabled(false);
@@ -299,7 +309,9 @@ void MainWindow::on_buttonDown(){
     std::pair<int,int> numPages=map.getNumPages();
     std::pair<int,int> currPages=map.getCurrentPage();
 
+    map.setCurrentVisibleMap(visibleMap);
     currPages.first++;
+    updateVisibleMap(map.getCurrentVisibleMap());
 
     if(currPages.first==numPages.first-1)
         buttonDown->setEnabled(false);
@@ -320,7 +332,11 @@ void MainWindow::on_buttonLeft(){
     std::pair<int,int> numPages=map.getNumPages();
     std::pair<int,int> currPages=map.getCurrentPage();
 
+    map.setCurrentVisibleMap(visibleMap);
+
     currPages.second--;
+    updateVisibleMap(map.getCurrentVisibleMap());
+    //visibleMap=map.getCurrentVisibleMap();
 
     if(currPages.second==0)
         buttonLeft->setEnabled(false);
@@ -341,7 +357,11 @@ void MainWindow::on_buttonRight(){
     std::pair<int,int> numPages=map.getNumPages();
     std::pair<int,int> currPages=map.getCurrentPage();
 
+    map.setCurrentVisibleMap(visibleMap);
+
     currPages.second++;
+    updateVisibleMap(map.getCurrentVisibleMap());
+    //visibleMap=map.getCurrentVisibleMap();
 
     if(currPages.second==numPages.second-1)
         buttonRight->setEnabled(false);

@@ -46,6 +46,7 @@ protected:
 private:
     void createMapSection();
     void createTextureSection();
+    void updateVisibleMap(QList<QList<Cell>> &);
     Ui::MainWindow *ui;
     QPushButton *buttonUp,*buttonDown,*buttonLeft,*buttonRight;
     QList<QList<AdvancedQLabel*>> visibleMap;

@@ -20,6 +20,7 @@ public:
     QString getImgTexture();
     void loadTexture();
     bool hasTexture();
+    void clear();
 signals:
     void clicked();
 public slots:

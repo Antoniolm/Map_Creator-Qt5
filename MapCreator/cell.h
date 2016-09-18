@@ -17,6 +17,8 @@ public:
     void setState(QString &);
     QString getImgTexture();
     QString getState();
+    bool hasTexture();
+    void clear();
 
 private:
     QString imgTexture,state;

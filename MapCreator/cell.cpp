@@ -40,3 +40,27 @@ QString Cell::getImgTexture(){
 QString Cell::getState(){
     return state;
 }
+
+////////////////////7
+/// \brief Cell::hasTexture
+/// \return
+/// Método que nos devuelve true si la celda tiene una textura asignada
+/// y false si no tiene textura
+////////////////////////
+bool Cell::hasTexture(){
+    bool salida=true;
+    if(imgTexture.isEmpty()){
+        salida=false;
+    }
+    return salida;
+}
+
+//////////////////////////
+/// \brief Cell::clear
+/// Método para limpiar nuestro objecto cell
+/////////////////////////
+void Cell::clear(){
+    imgTexture.clear();
+    state.clear();
+}
+
