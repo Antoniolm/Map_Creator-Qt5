@@ -23,13 +23,14 @@ gameMap::gameMap()
 
     QList<Cell> auxList;
     Cell auxCell;
-    for(int i=0;i<cellPerPages.first;i++){
-        for(int j=0;j<cellPerPages.second;j++){
-            auxList.append(auxCell);
-        }
+
+    for(int j=0;j<cellPerPages.second;j++)
+        auxList.append(auxCell);
+
+    for(int i=0;i<cellPerPages.first;i++)
         auxVisibleMap.append(auxList);
-        auxList.clear();
-    }
+
+
 }
 
 gameMap::~gameMap(){
@@ -131,6 +132,7 @@ QList<QList<Cell>> & gameMap::getCurrentVisibleMap(){
 
             if((clave.first>=initHeight && clave.first<endHeight)&& (clave.second>=initWidth && clave.second<endWidth)){
                 auxVisibleMap[visibleHeight][visibleWidth].setImgTexture((*it).getImgTexture());
+                qDebug()<< "The aplication go inside the if";
             }
             //qDebug()<<"Key<"+QString::number(clave.first)+","+QString::number(clave.second)+">"+"->"+(*it).getImgTexture();
     }

@@ -235,6 +235,7 @@ void MainWindow::updateVisibleMap(QList<QList<Cell>> &auxMap){
             visibleMap[i][j]->clear(); //limpiamos las texturas anteriores
             if(auxMap[i][j].hasTexture()){
                 visibleMap[i][j]->setImgTexture(auxMap[i][j].getImgTexture());
+                visibleMap[i][j]->loadTexture();
             }
         }
     }
@@ -287,15 +288,13 @@ void MainWindow::on_buttonUp(){
     map.setCurrentVisibleMap(visibleMap);
     currPages.first--;
 
-    updateVisibleMap(map.getCurrentVisibleMap());
-
     if(currPages.first==0)
         buttonUp->setEnabled(false);
 
     buttonDown->setEnabled(true);
 
     map.setCurrentPage(currPages);
-
+    updateVisibleMap(map.getCurrentVisibleMap());
 }
 
 //////////////////////////////////
@@ -311,7 +310,6 @@ void MainWindow::on_buttonDown(){
 
     map.setCurrentVisibleMap(visibleMap);
     currPages.first++;
-    updateVisibleMap(map.getCurrentVisibleMap());
 
     if(currPages.first==numPages.first-1)
         buttonDown->setEnabled(false);
@@ -319,6 +317,7 @@ void MainWindow::on_buttonDown(){
     buttonUp->setEnabled(true);
 
     map.setCurrentPage(currPages);
+    updateVisibleMap(map.getCurrentVisibleMap());
 }
 
 //////////////////////////////////
@@ -335,8 +334,6 @@ void MainWindow::on_buttonLeft(){
     map.setCurrentVisibleMap(visibleMap);
 
     currPages.second--;
-    updateVisibleMap(map.getCurrentVisibleMap());
-    //visibleMap=map.getCurrentVisibleMap();
 
     if(currPages.second==0)
         buttonLeft->setEnabled(false);
@@ -344,6 +341,7 @@ void MainWindow::on_buttonLeft(){
     buttonRight->setEnabled(true);
 
     map.setCurrentPage(currPages);
+    updateVisibleMap(map.getCurrentVisibleMap());
 }
 
 //////////////////////////////////
@@ -360,8 +358,6 @@ void MainWindow::on_buttonRight(){
     map.setCurrentVisibleMap(visibleMap);
 
     currPages.second++;
-    updateVisibleMap(map.getCurrentVisibleMap());
-    //visibleMap=map.getCurrentVisibleMap();
 
     if(currPages.second==numPages.second-1)
         buttonRight->setEnabled(false);
@@ -369,7 +365,7 @@ void MainWindow::on_buttonRight(){
     buttonLeft->setEnabled(true);
 
     map.setCurrentPage(currPages);
-
+    updateVisibleMap(map.getCurrentVisibleMap());
 }
 
 /////////////////////////
