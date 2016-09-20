@@ -87,7 +87,7 @@ void MainWindow::createMapSection(){
         for(int j=0;j<50;j++){
            label=new AdvancedQLabel("",15,15,30,30);
            connect(label,SIGNAL(clicked()),this,SLOT(onClicked()));
-           connect(label,SIGNAL(Grab()),this,SLOT(onClicked()));
+           connect(label,SIGNAL(move()),this,SLOT(onClicked()));
            auxList.append(label);
            hBox->addWidget(label);
         }

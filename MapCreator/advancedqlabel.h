@@ -17,6 +17,7 @@ public:
     explicit AdvancedQLabel(QString,int minH,int minW,int maxH,int maxW,QWidget *parent = 0);
     ~AdvancedQLabel();
     void mousePressEvent(QMouseEvent *ev);
+    void mouseMoveEvent(QMouseEvent *ev);
     void setImgTexture(QString);
     QString getImgTexture();
     void loadTexture();
@@ -24,7 +25,7 @@ public:
     void clear();
 signals:
     void clicked();
-    void Grab();
+    void move();
 public slots:
     void slotClicked();
 

@@ -51,8 +51,16 @@ void AdvancedQLabel::mousePressEvent(QMouseEvent *ev){
         QPixmap pixmap("");
         setPixmap(pixmap);
     }
-    else{
-        emit clicked();
+}
+
+//////////////////////
+/// \brief AdvancedQLabel::mouseMoveEvent
+/// \param ev
+/// Signal creado para darle la funcionalidad de movimiento del raton sobre nuestro QLabel
+/////////////////////
+void AdvancedQLabel::mouseMoveEvent(QMouseEvent *ev){
+    if(ev->buttons() != Qt::RightButton && ev->buttons()==Qt::LeftButton){
+        emit move();
     }
 }
 
