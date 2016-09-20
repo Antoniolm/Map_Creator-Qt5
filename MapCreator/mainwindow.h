@@ -48,9 +48,9 @@ private:
     void createTextureSection();
     void updateVisibleMap(QList<QList<Cell>> &);
     Ui::MainWindow *ui;
-    QPushButton *buttonUp,*buttonDown,*buttonLeft,*buttonRight;
-    QList<QList<AdvancedQLabel*>> visibleMap;
-    gameMap map;
+    QPushButton *buttonUp,*buttonDown,*buttonLeft,*buttonRight; //Botones de navegación por el mapa
+    QList<QList<AdvancedQLabel*>> visibleMap; //Sección del mapa visible actualmente
+    gameMap map; //Mapa global
     QLabel *nameSection;
     QString currentTexture;
 };

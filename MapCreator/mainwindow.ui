@@ -14,18 +14,14 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QSplitter" name="splitter">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QWidget" name="horizontalLayoutWidget">
-       <layout class="QHBoxLayout" name="map_section">
-        <property name="rightMargin">
-         <number>11</number>
-        </property>
-       </layout>
+      <widget class="QWidget" name="verticalLayoutWidget_2">
+       <layout class="QVBoxLayout" name="map_section"/>
       </widget>
       <widget class="Line" name="line_section">
        <property name="orientation">
@@ -35,7 +31,7 @@
       <widget class="QWidget" name="verticalLayoutWidget">
        <layout class="QVBoxLayout" name="texture_section">
         <item>
-         <widget class="QComboBox" name="texture_list"/>
+         <widget class="QComboBox" name="textureList"/>
         </item>
         <item>
          <widget class="QListWidget" name="textureListWidget"/>

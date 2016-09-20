@@ -59,7 +59,15 @@ void MainWindow::resizeEvent(QResizeEvent* event)
 void MainWindow::createMapSection(){
     AdvancedQLabel *label;
     QList<AdvancedQLabel*> auxList; //lista auxiliar para rellenar visibleMap
-    ui->map_section->setAlignment(Qt::AlignCenter);
+
+    QHBoxLayout *HBoxAllSection=new QHBoxLayout(); //Layout que contendra el mapa y los botones de navegación
+
+    //Añadimos el qlabel para indicar la sección actual en el mapa
+    nameSection=new QLabel("Section <-,->");
+    nameSection->setAlignment(Qt::AlignCenter);
+    nameSection->setStyleSheet("QLabel {border:1px solid black; background:#A78CC3; font-size:20px}");
+    ui->map_section->addWidget(nameSection);
+
 
     //Creamos los botones para el movimiento por el mapa y vamos añadiendolos al
     //layout principal
@@ -69,15 +77,15 @@ void MainWindow::createMapSection(){
     connect(buttonLeft,SIGNAL(clicked(bool)),this,SLOT(on_buttonLeft()));
     buttonLeft->setEnabled(false);
     buttonLeft->setFocusPolicy(Qt::NoFocus);
-    ui->map_section->addWidget(buttonLeft);
+    HBoxAllSection->addWidget(buttonLeft);
 
     QHBoxLayout *hBox;
-    QVBoxLayout *vBox = new QVBoxLayout();
+    QVBoxLayout *vBoxMap = new QVBoxLayout();
     buttonUp= new QPushButton("up");
     connect(buttonUp,SIGNAL(clicked(bool)),this,SLOT(on_buttonUp()));
     buttonUp->setEnabled(false);
     buttonUp->setFocusPolicy(Qt::NoFocus);
-    vBox->addWidget(buttonUp);
+    vBoxMap->addWidget(buttonUp);
 
     //Creamos la estructura principal del mapa
     //30x50 de AdvancedQLabel
@@ -92,16 +100,21 @@ void MainWindow::createMapSection(){
            hBox->addWidget(label);
         }
         visibleMap.append(auxList);
-        vBox->addLayout(hBox);
+        vBoxMap->addLayout(hBox);
     }
 
     buttonDown= new QPushButton("down");
     connect(buttonDown,SIGNAL(clicked(bool)),this,SLOT(on_buttonDown()));
     buttonDown->setEnabled(false);
     buttonDown->setFocusPolicy(Qt::NoFocus);
-    vBox->addWidget(buttonDown);
+    vBoxMap->addWidget(buttonDown);
 
-    ui->map_section->addLayout(vBox);
+
+
+    //Los añadimos
+    //vBoxLabel->addWidget(nameSection);
+    //vBoxLabel->addLayout(vBoxMap);
+    HBoxAllSection->addLayout(vBoxMap);
 
     buttonRight= new QPushButton("right");
     buttonRight->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding);
@@ -110,7 +123,9 @@ void MainWindow::createMapSection(){
     buttonRight->setEnabled(false);
     buttonRight->setFocusPolicy(Qt::NoFocus);
 
-    ui->map_section->addWidget(buttonRight);
+    HBoxAllSection->addWidget(buttonRight);
+    ui->map_section->addLayout(HBoxAllSection);
+    ui->map_section->setAlignment(Qt::AlignCenter);
     ui->map_section->setSpacing(0);
     ui->map_section->setMargin(0);
     ui->map_section->setContentsMargins(-5,-5,-5,-5);
@@ -284,11 +299,12 @@ void MainWindow::on_buttonUp(){
     map.setCurrentVisibleMap(visibleMap);
     currPages.first--;
 
+    //Actualizamos los botones y el mapa
     if(currPages.first==0)
         buttonUp->setEnabled(false);
 
     buttonDown->setEnabled(true);
-
+    nameSection->setText("Section <"+QString::number(currPages.first)+","+QString::number(currPages.second)+">");
     map.setCurrentPage(currPages);
     updateVisibleMap(map.getCurrentVisibleMap());
 }
@@ -306,11 +322,12 @@ void MainWindow::on_buttonDown(){
     map.setCurrentVisibleMap(visibleMap);
     currPages.first++;
 
+    //Actualizamos los botones y el mapa
     if(currPages.first==numPages.first-1)
         buttonDown->setEnabled(false);
 
     buttonUp->setEnabled(true);
-
+    nameSection->setText("Section <"+QString::number(currPages.first)+","+QString::number(currPages.second)+">");
     map.setCurrentPage(currPages);
     updateVisibleMap(map.getCurrentVisibleMap());
 }
@@ -325,14 +342,14 @@ void MainWindow::on_buttonLeft(){
     std::pair<int,int> currPages=map.getCurrentPage();
 
     map.setCurrentVisibleMap(visibleMap);
-
     currPages.second--;
 
+    //Actualizamos los botones y el mapa
     if(currPages.second==0)
         buttonLeft->setEnabled(false);
 
     buttonRight->setEnabled(true);
-
+    nameSection->setText("Section <"+QString::number(currPages.first)+","+QString::number(currPages.second)+">");
     map.setCurrentPage(currPages);
     updateVisibleMap(map.getCurrentVisibleMap());
 }
@@ -348,14 +365,15 @@ void MainWindow::on_buttonRight(){
     std::pair<int,int> currPages=map.getCurrentPage();
 
     map.setCurrentVisibleMap(visibleMap);
-
     currPages.second++;
 
+
+    //Actualizamos los botones y el mapa
     if(currPages.second==numPages.second-1)
         buttonRight->setEnabled(false);
 
     buttonLeft->setEnabled(true);
-
+    nameSection->setText("Section <"+QString::number(currPages.first)+","+QString::number(currPages.second)+">");
     map.setCurrentPage(currPages);
     updateVisibleMap(map.getCurrentVisibleMap());
 }
@@ -389,10 +407,11 @@ void MainWindow::on_actionNew_File_triggered()
     buttonDown->setEnabled(true);
 
 
-    //Actualizamos el color de nuestro mapa visible
+    //Actualizamos el color de nuestro mapa visible y el Qlabel de nuestra sección actual
     for(int i=0;i<visibleMap.size();i++)
         for(int j=0;j<visibleMap[i].size();j++)
             visibleMap[i][j]->setStyleSheet("QLabel {background: white;border:1px solid gray;}");
 
+    nameSection->setText("Section <0,0>");
     delete sizeMapDia;
 }
