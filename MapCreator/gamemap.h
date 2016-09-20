@@ -10,7 +10,7 @@
 
 #include <advancedqlabel.h>
 #include <cell.h>
-#include <QMap>
+#include <QMultiMap>
 #include <QDebug>
 
 using namespace std;
@@ -30,7 +30,7 @@ public:
     QList<QList<Cell>> & getCurrentVisibleMap();
 
 private:
-    QMap<pair<int,int>,Cell> textureMap;
+    QMultiMap<int,Cell> textureMap; //Nuestro mapa completo(solo contendra las celdas que tenga una textura )
     QList<QList<Cell>> auxVisibleMap;// visibleMap auxiliar que nos agilizara el obtener la sección actual del mapa
     pair<int,int> sizeMap;  //Nos indica el tamaño en celda de nuestro mapa <height,width>
     pair<int,int> numPages; //Nos indica el numero de paginas total <height,width>

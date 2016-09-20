@@ -8,7 +8,6 @@
 
 Cell::Cell()
 {
-
 }
 
 ///
@@ -26,6 +25,16 @@ void Cell::setState(QString &stat){
 }
 
 ///
+/// \brief Cell::setPosition
+/// \param posH
+/// \param posW
+///
+void Cell::setPosition(int posH,int posW){
+    position.first=posH;
+    position.second=posW;
+}
+
+///
 /// \brief Cell::getImgTexture
 /// \return
 ///
@@ -39,6 +48,14 @@ QString Cell::getImgTexture(){
 ///
 QString Cell::getState(){
     return state;
+}
+
+///
+/// \brief Cell::getPosition
+/// \return
+///
+pair<int,int> Cell::getPosition(){
+    return position;
 }
 
 ////////////////////7

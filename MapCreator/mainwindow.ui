@@ -60,6 +60,10 @@
      <string>File</string>
     </property>
     <addaction name="actionNew_File"/>
+    <addaction name="actionOpen_Map"/>
+    <addaction name="actionSave_Map"/>
+    <addaction name="actionClose_Map"/>
+    <addaction name="actionExit"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
@@ -74,7 +78,32 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionNew_File">
    <property name="text">
-    <string>New File</string>
+    <string>New Map</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionOpen_Map">
+   <property name="text">
+    <string>Open Map</string>
+   </property>
+  </action>
+  <action name="actionSave_Map">
+   <property name="text">
+    <string>Save Map</string>
+   </property>
+  </action>
+  <action name="actionClose_Map">
+   <property name="text">
+    <string>Close Map</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
    </property>
   </action>
  </widget>

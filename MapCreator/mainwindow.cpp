@@ -1,4 +1,4 @@
-///////////////////////////////////////////
+ ///////////////////////////////////////////
 ///
 /// @author Antonio David López Machado
 ///
@@ -267,11 +267,8 @@ void MainWindow::onClicked(){
 void MainWindow::on_SelectTexture(){
     QListWidgetItem *item=ui->textureListWidget->currentItem();
     qDebug()<< "El texto es : "+item->text();
-    //QPoint p = this->mapFromGlobal(QCursor::pos());
-    //AdvancedQLabel *label= static_cast<AdvancedQLabel*>(this->childAt(p.x(),p.y()));
-    //label->
-    currentTexture=item->text()+".png";//;label->getImgTexture();
-    //QObject::property()
+
+    currentTexture=item->text()+".png";
 }
 
 //////////////////////////////////
@@ -281,8 +278,6 @@ void MainWindow::on_SelectTexture(){
 /// sección de arriba de la sección anterior
 ///////////////////////////////////////
 void MainWindow::on_buttonUp(){
-    std::pair<int,int> size=map.getSizeMap();
-    std::pair<int,int> numPages=map.getNumPages();
     std::pair<int,int> currPages=map.getCurrentPage();
 
     map.setCurrentVisibleMap(visibleMap);
@@ -304,7 +299,6 @@ void MainWindow::on_buttonUp(){
 /// sección de abajo de la sección anterior
 ///////////////////////////////////////
 void MainWindow::on_buttonDown(){
-    std::pair<int,int> size=map.getSizeMap();
     std::pair<int,int> numPages=map.getNumPages();
     std::pair<int,int> currPages=map.getCurrentPage();
 
@@ -327,8 +321,6 @@ void MainWindow::on_buttonDown(){
 /// sección a la izquierda de la sección anterior
 ///////////////////////////////////////
 void MainWindow::on_buttonLeft(){
-    std::pair<int,int> size=map.getSizeMap();
-    std::pair<int,int> numPages=map.getNumPages();
     std::pair<int,int> currPages=map.getCurrentPage();
 
     map.setCurrentVisibleMap(visibleMap);
@@ -351,7 +343,6 @@ void MainWindow::on_buttonLeft(){
 /// sección a la derecha de la sección anterior
 ///////////////////////////////////////
 void MainWindow::on_buttonRight(){
-    std::pair<int,int> size=map.getSizeMap();
     std::pair<int,int> numPages=map.getNumPages();
     std::pair<int,int> currPages=map.getCurrentPage();
 
