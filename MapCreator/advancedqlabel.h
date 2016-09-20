@@ -8,6 +8,7 @@
 #define ADVANCEDQLABEL_H
 
 #include <QLabel>
+#include <QMouseEvent>
 
 class AdvancedQLabel : public QLabel
 {
@@ -23,6 +24,7 @@ public:
     void clear();
 signals:
     void clicked();
+    void Grab();
 public slots:
     void slotClicked();
 

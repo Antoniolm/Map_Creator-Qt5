@@ -15,7 +15,7 @@ AdvancedQLabel::AdvancedQLabel(QString imgTextu,int minH,int minW,int maxH,int m
     setMaximumHeight(maxH);
     setMaximumWidth(maxW);
     //setFixedWidth(20);
-    connect(this,SIGNAL(clicked()),this,SLOT(slotClicked()));
+    //connect(this,SIGNAL(clicked()),this,SLOT(slotClicked()));
 
     if(imgTextu.isEmpty()){
         setStyleSheet("QLabel {background: gray;border:1px solid black;}");
@@ -40,13 +40,20 @@ void AdvancedQLabel::slotClicked(){
 
 }
 
-///
+//////////////////////
 /// \brief AdvancedQLabel::mousePressEvent
 /// \param ev
-///
+/// Signal creado para darle la funcionalidad de clickeo sobre nuestro QLabel
+/////////////////////
 void AdvancedQLabel::mousePressEvent(QMouseEvent *ev){
-
-    emit clicked();
+    if(ev->buttons() == Qt::RightButton && ev->buttons()!=Qt::LeftButton){
+        imgTexture.clear();
+        QPixmap pixmap("");
+        setPixmap(pixmap);
+    }
+    else{
+        emit clicked();
+    }
 }
 
 ///
